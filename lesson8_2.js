@@ -35,10 +35,11 @@ const arr = [{
     }
 }, f
 ]
-function printAll(){
-arr.forEach(element => {
-    element.print();
-});}
+function printAll() {
+    arr.forEach(element => {
+        element.print();
+    });
+}
 printAll()
 console.log("===============================");
 arr[0].color = "orange";
@@ -69,25 +70,74 @@ document.querySelector("#btn").onclick = () => {
 let num = document.querySelector("#num")
 num.onblur = () => {
     console.log("++++++++++++++++++++");
-    const f2 = arr.filter(x=>x.num<=num.value)
+    const f2 = arr.filter(x => x.num <= num.value)
     for (const x of f2) {
         x.print();
     }
     console.log("===============================");
 };
-for(const x of arr){
-   Object.defineProperty(x,"Price",{
-    get() {return x.price},
-    set(value) {if(value>10 && value<10000)x.price=value}
-   })
+for (const x of arr) {
+    Object.defineProperty(x, "Price", {
+        get() { return x.price },
+        set(value) { if (value > 10 && value < 10000) x.price = value }
+    })
 }
 console.log("????????????????????????????????????");
 printAll()
-arr[0].Price=1;
-arr[1].Price=100
-arr[2].Price=50
+arr[0].Price = 1;
+arr[1].Price = 100
+arr[2].Price = 50
 console.log("????????????????????????????????????");
 printAll()
 console.log("????????????????????????????????????");
 
+function messageBox(color="black", backgroundColor="white", img, title="", body="") {
+    this.color=color;
+    this.backgroundColor=backgroundColor;
+    this.img=img;
+    this.title=title;
+    this.body=body;
+    this.message=this.title+"/n"+this.body;
 
+    this.render=function(){
+        const container = document.createElement("div");
+        container.style.color = this.color;
+        container.style.backgroundColor = this.backgroundColor;
+        container.style.border = "1px solid #ccc";
+        container.style.padding = "10px";
+        container.style.borderRadius = "5px";
+        container.style.maxWidth = "300px";
+
+        if(this.img){
+            const imgElement = document.createElement("img");
+            imgElement.src = this.img;
+            imgElement.style.maxWidth = "50%";
+            container.appendChild(imgElement);
+        }
+        const titleElement=document.createElement("h1");
+        titleElement.textContent=title;
+        container.appendChild(titleElement)
+
+        const bodyElement=document.createElement("p");
+        bodyElement.textContent=body;
+        container.appendChild(bodyElement);
+
+        return container;
+    }
+}
+
+const infoBox = new messageBox("white","blue", "","Information","This is an informational message.");
+
+const warningBox = new messageBox("black","yellow","","Warning","This is a warning message.");
+
+const errorBox = new messageBox("white","red","","Error","This is an error message.");
+
+
+// document.body.appendChild(infoBox.render());
+// document.body.appendChild(warningBox.render());
+// document.body.appendChild(errorBox.render());
+
+let form=document.querySelector("#form").onclick=()=>{
+    //function to new form
+    
+}
